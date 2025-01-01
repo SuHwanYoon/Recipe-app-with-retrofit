@@ -8,6 +8,7 @@ data class Category (
     val strCategoryDescription : String
 )
 
+// Category데이터 클래스의 리스트가 담기는 데이터 클래스
 data class CategoriesResponse(val categories : List<Category>)
 
 // The meal DB API
