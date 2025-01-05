@@ -22,25 +22,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    // RecipeScreen 함수를 사용하여 레시피 화면을 그림
+                    // RecipeScreen 함수는 레시피 화면을 그리는 UI 함수
+                    RecipeScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RecipeAppTheme {
-        Greeting("Android")
-    }
-}

@@ -1,5 +1,6 @@
 package yoon.tutorials.recipeapp
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -17,7 +18,8 @@ class MainViewModel : ViewModel() {
 
     // State 변수는 상태를 가져오기만 하고 변경을 할수가 없음
     // State 변수는 RecipeState 클래스를 사용하여 상태를 가져옴
-    // 외부로 노출할 변수 State로 변하지않는 상태의 변수를 선언
+    // 외부에서 상태를 참조할 변수
+    // State로 변하지않는 상태의 변수를 선언
     val categoriesState: State<RecipeState> = _categorieState
 
     // MainViewModel 클래스가 생성될때 자동으로 fetchCategories()가 실행되는 초기화 블록
@@ -50,6 +52,7 @@ class MainViewModel : ViewModel() {
                 // copy 함수는 RecipeState 클래스의 복사본을 생성
                 // copy 함수는 변경된 값을 전달하여 새로운 RecipeState 객체를 생성
                 // copy 함수는 변경된 값을 전달하지 않으면 기존 객체를 그대로 반환
+                Log.e("MainViewModel", "Error fetching Categories", e)
                 _categorieState.value = _categorieState.value.copy(
                     loading = false,
                     error = "Error fetching Categories ${e.message}"

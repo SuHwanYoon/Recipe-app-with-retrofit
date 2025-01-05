@@ -2,9 +2,13 @@ package yoon.tutorials.recipeapp
 
 //Model Class
 data class Category (
+    // 카테고리 ID
     val idCategory : String,
+    // 카테고리 이름
     val strCategory : String,
+    // 카테고리 이미지 URL
     val strCategoryThumb : String,
+    // 카테고리 설명
     val strCategoryDescription : String
 )
 
