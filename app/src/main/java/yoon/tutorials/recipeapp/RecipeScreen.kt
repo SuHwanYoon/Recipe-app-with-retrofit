@@ -28,10 +28,11 @@ import coil.compose.rememberAsyncImagePainter
 fun RecipeScreen(modifier: Modifier = Modifier) {
     // MainViewModel 클래스의 인스턴스 생성
     val recipeViewModel: MainViewModel = viewModel()
-    // MainViewModel내부의 선언되어있는
-    // RecipeState data 클래스의 categoriesState 변수를 가져와서 상태를 관리
+    // data 클래스의 상태를 변경할수있는
+    // categoriesState 변수를 상태를 관리
     // categoriesState 변수는 State<RecipeState> 타입이므로
-    // by 키워드로 viewState 변수가 자동으로 업데이트 되도록 함
+    // by 키워드로 viewState가 자동으로 업데이트 되도록 함
+    // viewState 변수는 표시하려는 데이터를 로드 했는지에 대한 정보를 제공
     val viewState by recipeViewModel.categoriesState
     // Box 함수를 사용하여 로딩중일때, 에러일때, 데이터가 있을때의 UI를 그림
     Box(modifier = Modifier.fillMaxSize()) {
@@ -56,7 +57,7 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
     }
 }
 
-// 카테고리 화면을 그리는 UI 함수
+// API호출이 되었을때 카테고리 화면을 그리는 UI 함수
 @Composable
 // CategoryScreen 함수는 Category 데이터 클래스의 리스트를 받아서 화면을 그림
 fun CategoryScreen(categories: List<Category>?) {
@@ -70,7 +71,7 @@ fun CategoryScreen(categories: List<Category>?) {
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize()
     ) {
-        // categories 리스트를 순회하면서 카테고리 아이템을 그림
+        // categories 리스트를 순회하면서 모든 카테고리 아이템을 함수를 표시
         items(categories?: emptyList()) { category ->
             // CategoryItem 함수를 사용하여 카테고리 아이템을 그림
             CategoryItem(category = category)
@@ -106,6 +107,8 @@ fun CategoryItem(category: Category) {
         
         // Category 데이터 클래스의 strCategory 속성을 사용하여 카테고리 이름을 표시
         Text(
+            // 텍스트 속성을 사용하여 텍스트를 표시
+            // category.strCategory 속성을 사용하여 카테고리 이름을 표시
             text = category.strCategory,
             color = Color.Black,
             style = TextStyle(fontWeight = FontWeight.Bold),

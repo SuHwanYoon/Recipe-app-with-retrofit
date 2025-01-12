@@ -1,6 +1,8 @@
 package yoon.tutorials.recipeapp
 
 //Model Class
+//API의 응답을 매핑할 데이터 클래스
+//따라서 API의 응답과 동일한 구조로 데이터 클래스를 정의
 data class Category (
     // 카테고리 ID
     val idCategory : String,

@@ -8,17 +8,23 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 
+// RecipeScreen 함수에서 사용할 MainViewModel 클래스
+// ViewModel 클래스를 상속받아서 사용
+// ViewModel 클래스는 UI 관련 데이터를 저장하고 관리
+// ViewModel 클래스는 화면 회전과 같은 상태 변경 시 데이터를 유지
+// ViewModel 클래스는 UI 컴포넌트와 데이터를 분리하여 관리
 class MainViewModel : ViewModel() {
 
     // 상태를 관리할 때 사용할 변수
     // mutableStateOf 함수를 사용하여 상태를 관리
     // mutableStateOf 함수는 상태를 변경할 수 있는 변수를 생성
     // RecipeState 클래스는 로딩 중인지 여부, 레시피 목록, 에러 메시지를 관리
+    // private를 사용함으로서 상태변경이 viewModel을 사용할때만 이루어지게 함
     private val _categorieState = mutableStateOf(RecipeState())
 
     // State 변수는 상태를 가져오기만 하고 변경을 할수가 없음
-    // State 변수는 RecipeState 클래스를 사용하여 상태를 가져옴
-    // 외부에서 상태를 참조할 변수
+    // State 변수는 data 클래스를 사용하여 상태를 가져옴
+    // 외부에서는 상태를 읽기만 하고 변경을 할수없음
     // State로 변하지않는 상태의 변수를 선언
     val categoriesState: State<RecipeState> = _categorieState
 
@@ -29,8 +35,9 @@ class MainViewModel : ViewModel() {
 
     // ApiService 인터페이스를 사용하여 API 요청을 보내기 위한 변수
     private fun fetchCategories() {
-        // viewModelScope.launch 함수를 사용하여 코루틴을 실행
+        // viewModelScope.launch 함수를 사용하여 coroutines을 실행
         // viewModelScope.launch 함수는 ViewModel이 제거될 때 코루틴을 취소
+        // corotines를 사용해서 suspend 함수를 비동기적으로 호출
         viewModelScope.launch {
             // 코루틴 내에서 비동기 작업을 수행
             try {
@@ -63,6 +70,7 @@ class MainViewModel : ViewModel() {
 
     // RecipeState 클래스를 사용하여 상태를 관리
     // RecipeState 클래스는 로딩 중인지 여부, 레시피 목록, 에러 메시지를 관리
+    // 이 data class로 Category data Model 클래스를 사용
     data class RecipeState(
         // 로딩 중인지 여부
         // 초기값은 true로 설정하여 로딩중임을 표시
