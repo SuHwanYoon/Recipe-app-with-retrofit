@@ -5,7 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 // RecipeScreen 함수에서 사용할 MainViewModel 클래스
@@ -13,7 +15,13 @@ import kotlinx.coroutines.launch
 // ViewModel 클래스는 UI 관련 데이터를 저장하고 관리
 // ViewModel 클래스는 화면 회전과 같은 상태 변경 시 데이터를 유지
 // ViewModel 클래스는 UI 컴포넌트와 데이터를 분리하여 관리
-class MainViewModel : ViewModel() {
+// 인터페이스를 사용하여 API 요청을 보내기 위한 ApiService 인터페이스를 주입받음
+// HiltViewModel 어노테이션을 사용하여 Hilt가 이 ViewModel을 관리하도록 함
+// 만들어둔 ApiService 인터페이스 의존성을 주입하고 사용
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val _recipeApiService: ApiService
+) : ViewModel() {
 
     // 상태를 관리할 때 사용할 변수
     // mutableStateOf 함수를 사용하여 상태를 관리
@@ -26,6 +34,7 @@ class MainViewModel : ViewModel() {
     // State 변수는 data 클래스를 사용하여 상태를 가져옴
     // 외부에서는 상태를 읽기만 하고 변경을 할수없음
     // State로 변하지않는 상태의 변수를 선언
+    // 외부에서 상태를 viewModel의 상태를 읽을수 있는 변수를 정의
     val categoriesState: State<RecipeState> = _categorieState
 
     // MainViewModel 클래스가 생성될때 자동으로 fetchCategories()가 실행되는 초기화 블록
@@ -33,7 +42,7 @@ class MainViewModel : ViewModel() {
         fetchCategories()
     }
 
-    // ApiService 인터페이스를 사용하여 API 요청을 보내기 위한 변수
+    // ApiService 인터페이스를 사용하여 API 요청을 보내기 위한 함수
     private fun fetchCategories() {
         // viewModelScope.launch 함수를 사용하여 coroutines을 실행
         // viewModelScope.launch 함수는 ViewModel이 제거될 때 코루틴을 취소
@@ -41,9 +50,9 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             // 코루틴 내에서 비동기 작업을 수행
             try {
-                // recipeService.getCategories() 함수를 호출하여 카테고리 목록을 가져옴
-                // recipeService.getCategories() 함수는 API 요청을 보내고 응답을 받음
-                val response = recipeService.getCategories()
+                // recipeApiService.getCategories() 함수를 호출하여 카테고리 목록을 가져옴
+                // recipeApiService.getCategories() 함수는 API 요청을 보내고 응답을 받음
+                val response = _recipeApiService.getCategories()
                 // 카테고리 목록을 가져오면 상태를 변경
                 // _categorieState.value 변수에 copy 함수를 사용하여 상태를 변경
                 // copy 함수로 기존 데이터 클래스 객체를 복사하고 특정 속성만 변경
@@ -53,7 +62,7 @@ class MainViewModel : ViewModel() {
                     loading = false,
                     error = null
                 )
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 // 에러가 발생하면 상태를 변경
                 // _categorieState.value 변수에 copy 함수를 사용하여 상태를 변경
                 // copy 함수는 RecipeState 클래스의 복사본을 생성

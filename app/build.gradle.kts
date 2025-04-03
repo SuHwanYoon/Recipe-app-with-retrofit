@@ -5,12 +5,6 @@ plugins {
     kotlin("kapt")
 }
 
-//plugins {
-//
-//    id(testLibs.plugins.android.application)  version testLibs.plugins.android.application.version
-//    id(testLibs.plugins.kotlin.android.get().pluginId) version testLibs.plugins.kotlin.android.get().version
-//}
-
 android {
     namespace = "yoon.tutorials.recipeapp"
     compileSdk = 34
@@ -38,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true

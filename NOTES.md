@@ -4,6 +4,33 @@
 - `Ctrl + Shift + A` - Find Action
 - `Ctrl + N` - Find Class
 - `Ctrl + Shift + N` - Find File
+- `Ctrl + Alt + O` - Optimize Imports
+- `Ctrl + Alt + L` - Reformat Code
+- `Ctrl + Alt + I` - Auto-indent Lines
+- `Ctrl + D` - Duplicate Line or Block
+- `Ctrl + Y` - Delete Line
+- `Ctrl + Shift + V` - Paste from History
+- `Ctrl + Shift + F10` - Run
+- `Ctrl + Shift + F9` - Debug
+- `Ctrl + Shift + F8` - View Breakpoints
+- `Ctrl + Shift + F7` - Highlight Usages in File
+- `Ctrl + Shift + U` - Toggle Case
+- `Ctrl + Shift + /` - Comment/Uncomment Block
+- `Ctrl + /` - Comment/Uncomment Line
+- `Ctrl + Alt + T` - Surround with
+- `Ctrl + Alt + V` - Introduce Variable
+- `Ctrl + Alt + M` - Extract Method
+- `Ctrl + Alt + P` - Extract Parameter
+- `Ctrl + Alt + F` - Extract Field
+- `Ctrl + Alt + C` - Extract Constant
+- `Ctrl + Alt + B` - Go to Implementation(s)
+- `Ctrl + Shift + F` - Find in Path
+- `Ctrl + Shift + R` - Replace in Path
+- `Ctrl + B` - Go to Declaration
+- `Ctrl + H` - Type Hierarchy
+- `Ctrl + Shift + H` - Method Hierarchy
+- `Ctrl + Alt + H` - Call Hierarchy
+- `Ctrl + Shift + Alt + T` - Refactor This
 
 ## gradlew commands
 - `./gradlew tasks` - List all tasks
