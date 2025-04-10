@@ -3,6 +3,13 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
+    // Parcelable 인터페이스를 구현하는 데이터 클래스를 자동으로 생성해주는 플러그인
+    // Parcelable은 안드로이드에서 객체를 직렬화하는 방법 중 하나
+    // Parcelable 인터페이스를 구현하면 객체를 Intent에 담아서 다른 액티비티로 전달할 수 있음
+    // Parcelable 인터페이스를 구현하는 데이터 클래스를 자동으로 생성해주는 플러그인
+    // 이 플러그인을 사용하면 Parcelable 인터페이스를 구현하는 데이터 클래스를 수동으로 작성할 필요가 없음
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -52,6 +59,15 @@ android {
 }
 
 dependencies {
+    // okhttp3 라이브러리
+    implementation(testLibs.logging.interceptor)
+
+    // hilt-navigation-compose 라이브러리
+    implementation(testLibs.hilt.navigation.compose)
+
+    // navigation-compose 라이브러리
+    implementation(testLibs.navigation.compose)
+
     // Dagger Hilt Android 라이브러리
     implementation(testLibs.hilt.android)
     // Hilt Android Gradle 플러그인

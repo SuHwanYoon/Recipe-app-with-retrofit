@@ -50,9 +50,14 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             // 코루틴 내에서 비동기 작업을 수행
             try {
+
                 // recipeApiService.getCategories() 함수를 호출하여 카테고리 목록을 가져옴
                 // recipeApiService.getCategories() 함수는 API 요청을 보내고 응답을 받음
+                // 요청 시작 로그
+                Log.d("MainViewModel", "Starting API request")
                 val response = _recipeApiService.getCategories()
+                _categorieState.value = RecipeState(list = response.categories)
+                Log.d("MainViewModel", "API response received: $response")
                 // 카테고리 목록을 가져오면 상태를 변경
                 // _categorieState.value 변수에 copy 함수를 사용하여 상태를 변경
                 // copy 함수로 기존 데이터 클래스 객체를 복사하고 특정 속성만 변경
@@ -64,15 +69,22 @@ class MainViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 // 에러가 발생하면 상태를 변경
+
                 // _categorieState.value 변수에 copy 함수를 사용하여 상태를 변경
                 // copy 함수는 RecipeState 클래스의 복사본을 생성
                 // copy 함수는 변경된 값을 전달하여 새로운 RecipeState 객체를 생성
                 // copy 함수는 변경된 값을 전달하지 않으면 기존 객체를 그대로 반환
                 Log.e("MainViewModel", "Error fetching Categories", e)
-                _categorieState.value = _categorieState.value.copy(
+//                _categorieState.value = RecipeState(error = e.message)
+                _categorieState.value = RecipeState(
                     loading = false,
-                    error = "Error fetching Categories ${e.message}"
+                    error = e.message ?: "Unknown error occurred"
                 )
+
+//                _categorieState.value = _categorieState.value.copy(
+//                    loading = false,
+//                    error = "Error fetching Categories ${e.localizedMessage}"
+//                )
             }
         }
     }

@@ -4,8 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 // API 통신을 위한 Retrofit 설정과 서비스 인터페이스 정의
@@ -15,7 +18,19 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(logging)
+            .build()
+    }
     // Retrofit 인스턴스를 생성하는 함수
     // 이 함수를 사용해서 Retrofit 인스턴스를 생성
     // @Provides: Hilt에 의해 의존성 주입을 위한 함수로 사용됨
@@ -24,9 +39,10 @@ object NetworkModule {
     // recipeRetrofit() 함수는 Retrofit 인스턴스를 생성하고 반환
     @Provides
     @Singleton
-    fun recipeRetrofit(): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://www.themealdb.com/api/json/v1/1/")
+            .client(okHttpClient)  // OkHttpClient 연결
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -36,7 +52,7 @@ object NetworkModule {
     // @Singleton: 이 함수가 제공하는 객체는 애플리케이션 전체에서 단일 인스턴스로 사용됨
     @Provides
     @Singleton
-    fun ApiService(apiRetrofit: Retrofit): ApiService {
-        return apiRetrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }
