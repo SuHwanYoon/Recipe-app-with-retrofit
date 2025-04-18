@@ -100,6 +100,9 @@ class MainViewModel @Inject constructor(
         // 초기값은 빈 리스트
         // 레시피 목록을 가져오지 못하면 빈 리스트로 초기화
         val list: List<Category> = emptyList(),
+        // 에러 메시지 초기값 null
+        // String?는 null을 허용하는 String 타입
+        // ?는
         val error: String? = null
     )
 }
