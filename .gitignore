@@ -1,14 +1,13 @@
 *.iml
-.gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+#/.idea/caches
+#/.idea/libraries
+#/.idea/workspace.xml
+#/.idea/navEditor.xml
+#/.idea/assetWizardSettings.xml
+
+
 .DS_Store
-/build
 /captures
 .externalNativeBuild
 .cxx
@@ -39,10 +38,14 @@ proguard/
 # 로그 파일
 *.log
 
-# Android Studio / IntelliJ IDEA
-.idea/
-
-
+# Android Studio / IntelliJ IDEA - Ignore contents, but not specific important files
+.idea/* # .idea 디렉토리 안의 모든 파일/폴더를 무시합니다.
+!/.idea/*.iml # .iml 파일은 무시하지 않습니다.
+!/.idea/gradle.xml # gradle.xml 파일은 무시하지 않습니다.
+!/.idea/misc.xml # misc.xml 파일은 무시하지 않습니다.
+!/.idea/modules.xml # modules.xml 파일은 무시하지 않습니다.
+!/.idea/vcs.xml # vcs.xml 파일은 무시하지 않습니다.
+!/.idea/dictionaries/ # dictionaries 디렉토리는 무시하지 않습니다 (필요에 따라).
 # Windows 파일
 Thumbs.db
 
