@@ -38,12 +38,17 @@ proguard/
 # 로그 파일
 *.log
 
-# Android Studio / IntelliJ IDEA - Ignore contents, but not specific important files
-.idea/* # .idea 디렉토리 안의 모든 파일/폴더를 무시합니다.
-!/.idea/gradle.xml # gradle.xml 파일은 무시하지 않습니다.
-!/.idea/misc.xml # misc.xml 파일은 무시하지 않습니다.
+# Android Studio / IntelliJ IDEA - Ignore almost everything, but re-include important structure files
+/.idea/             # .idea 디렉토리 자체와 그 안의 모든 내용을 무시 (더 강력한 무시)
+!/.idea/            # 하지만 .idea 디렉토리 자체는 무시하지 않음 (Git이 안을 탐색하도록 허용)
+
+# 이제 안으로 들어와서 무시하지 않을 파일들을 명시합니다.
+!/.idea/.gitignore  # .idea/.gitignore 파일은 무시하지 않습니다 (만약 있다면).
+!/.idea/*.iml       # .iml 파일은 무시하지 않습니다. (<= 이 규칙 때문에 추적되었을 수 있습니다. 이걸 다시 무시하도록 변경하는 것이 표준입니다.)
+!/.idea/gradle.xml  # gradle.xml 파일은 무시하지 않습니다.
+!/.idea/misc.xml   # misc.xml 파일은 무시하지 않습니다.
 !/.idea/modules.xml # modules.xml 파일은 무시하지 않습니다.
-!/.idea/vcs.xml # vcs.xml 파일은 무시하지 않습니다.
+!/.idea/vcs.xml    # vcs.xml 파일은 무시하지 않습니다.
 !/.idea/dictionaries/ # dictionaries 디렉토리는 무시하지 않습니다 (필요에 따라).
 # Windows 파일
 Thumbs.db
