@@ -40,7 +40,6 @@ proguard/
 
 # Android Studio / IntelliJ IDEA - Ignore contents, but not specific important files
 .idea/* # .idea 디렉토리 안의 모든 파일/폴더를 무시합니다.
-!/.idea/*.iml # .iml 파일은 무시하지 않습니다.
 !/.idea/gradle.xml # gradle.xml 파일은 무시하지 않습니다.
 !/.idea/misc.xml # misc.xml 파일은 무시하지 않습니다.
 !/.idea/modules.xml # modules.xml 파일은 무시하지 않습니다.
