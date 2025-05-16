@@ -20,8 +20,8 @@ android {
         applicationId = "yoon.tutorials.recipeapp"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.01"
+        versionCode = 3
+        versionName = "1.02"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
